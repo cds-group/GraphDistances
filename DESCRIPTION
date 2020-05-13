@@ -1,0 +1,21 @@
+Package: GraphDistances
+Type: Package
+Title: Computes distribution based distances between graphs
+Version: 0.1.0
+Authors@R: 
+    person(given = "Ichcha",
+           family = "Manipur",
+           role = c("aut", "cre"),
+           email = "ichcha.manipur@icar.cnr.it")
+Maintainer: Ichcha Manipur <ichcha.manipur@icar.cnr.it>
+Description: Functions for distance computation between networks.
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 3.5.0)
+Imports: igraph,
+  philentropy (>= 0.4.0),
+  Matrix,
+  methods,
+  pracma
+RoxygenNote: 7.1.0
