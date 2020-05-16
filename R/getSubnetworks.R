@@ -35,14 +35,19 @@ getSubnetworksEigenadjacent <- function(g, eigenSortcutoff = 0.1,
     nodestoKeep <- length(which(graphCentralitySort$sorted_centrality >
                                   eigenSortcutoff))
   }
+  #-----------------------------------------------------------------------------
+
   adj_vert <- adjacent_vertices(g_u, rownames(graphCentralitySort)
                                 [1:nodestoKeep], mode = "all")
+  top_eig_names <- rownames(graphCentralitySort)[1:nodestoKeep]
+  top_eig_nodes <- c(as.numeric(V(g)[top_eig_names]))
   topNodeswithNeighbors <- unlist(adj_vert)
-  #-----------------------------------------------------------------------------
+  topNodeswithNeighbors <- (c(topNodeswithNeighbors, top_eig_nodes))
+  names(topNodeswithNeighbors) <- NULL
+  topNodeswithNeighbors <- unique(topNodeswithNeighbors)
 
   # Keep top eigen nodes and their first degree neighbors
   g_out <- delete_vertices(g_u, V(g_u)[-topNodeswithNeighbors])
-
   if (is_directed(g)){
     keepList <- (vertex.attributes(g_out)$name)
     keepListnumeric <- as.numeric(V(g)[keepList])
