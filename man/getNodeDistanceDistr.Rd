@@ -19,6 +19,6 @@ Node Distance Distribution computation
 }
 \examples{
 \dontrun{
-g <- make_tree(10, mode = "out")
+g <- igraph::make_tree(10, mode = "out")
 getNodeDistanceDistr(g)}
 }

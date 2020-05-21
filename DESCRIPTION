@@ -1,14 +1,17 @@
 Package: GraphDistances
 Type: Package
-Title: Computes distribution based distances between graphs
+Title: Distribution based distance computation between graphs
 Version: 0.1.0
+Year: 2020
+Date: 2020-05-21
 Authors@R: 
-    person(given = "Ichcha",
-           family = "Manipur",
-           role = c("aut", "cre"),
-           email = "ichcha.manipur@icar.cnr.it")
+  c(person("Ichcha", "Manipur", role = c("aut", "cre"),
+                     email = "ichcha.manipur@icar.cnr.it"),
+              person("Mario", "Guarracino", role = "aut"))
+Author: Ichcha Manipur [aut, cre],
+  Mario Guarracino [aut]
 Maintainer: Ichcha Manipur <ichcha.manipur@icar.cnr.it>
-Description: Functions for distance computation between networks.
+Description: Functions for distance computation between networks, useful for graph classification and clustering.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true

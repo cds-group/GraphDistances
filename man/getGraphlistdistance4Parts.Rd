@@ -4,7 +4,7 @@
 \alias{getGraphlistdistance4Parts}
 \title{getGraphlistdistance4Parts}
 \usage{
-getGraphlistdistance4Parts(distribMatlist, index = 1)
+getGraphlistdistance4Parts(distribMatlist, index = 1, writenodeDist = FALSE)
 }
 \arguments{
 \item{distribMatlist}{list of probability distribution matrices}

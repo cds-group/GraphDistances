@@ -34,7 +34,7 @@ getBins <- function(gList){
 #'
 #' @examples
 #' \dontrun{
-#' g <- make_tree(10, mode = "out")
+#' g <- igraph::make_tree(10, mode = "out")
 #' getNodeDistanceDistr(g)}
 getNodeDistanceDistr <- function(g, binList=NA){
 
@@ -66,7 +66,7 @@ getNodeDistanceDistr <- function(g, binList=NA){
 #'
 #' @examples
 #' \dontrun{
-#' g <- make_tree(10, mode = "out")
+#' g <- igraph::make_tree(10, mode = "out")
 #' # calculate one walk transition probability matrix
 #' getTransitionmatrix(g, walk = 1)}
 getTransitionmatrix <- function(g, walk=1){

@@ -16,7 +16,12 @@ Find the Jensen Shannon divergence between distribution matrices of graphs
 }
 \examples{
 \dontrun{
-g1 <- make_tree(10, mode = "out")
-g2 <- make_tree(10, children = 3, mode = "out")
-getGraphpairdistance(g1, g2)}
+library(igraph)
+num_nodes <- 60
+g1 <- make_tree(num_nodes, children =2, mode = "out")
+g2 <- make_tree(num_nodes, children = 3, mode = "out")
+binList <- getBins(list(g1, g2))
+ndd1 <- getNodeDistanceDistr(g1, binList)
+ndd2 <- getNodeDistanceDistr(g2, binList)
+getGraphpairdistance(ndd1, ndd2)}
 }

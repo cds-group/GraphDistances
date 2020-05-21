@@ -19,7 +19,7 @@ Transition Matrix computation
 }
 \examples{
 \dontrun{
-g <- make_tree(10, mode = "out")
+g <- igraph::make_tree(10, mode = "out")
 # calculate one walk transition probability matrix
 getTransitionmatrix(g, walk = 1)}
 }

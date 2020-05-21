@@ -5,7 +5,7 @@
 \title{Find the pairwise Jensen Shannon divergence between distribution matrices of
 a list of graphs}
 \usage{
-getGraphlistdistance(distribMatlist)
+getGraphlistdistance(distribMatlist, writenodeDist = FALSE)
 }
 \arguments{
 \item{distribMatlist}{list of probability distribution matrices}
@@ -16,4 +16,11 @@ Gram matrix with pairwise distances between graphs
 \description{
 Find the pairwise Jensen Shannon divergence between distribution matrices of
 a list of graphs
+}
+\examples{
+\dontrun{
+data("KidneyGraphs")
+binsList <- getBins(KidneyGraphs)
+nddList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binsaList))
+getGraphlistdistance(nddList)}
 }
