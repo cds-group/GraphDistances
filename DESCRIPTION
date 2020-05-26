@@ -20,5 +20,11 @@ Imports: igraph,
   philentropy (>= 0.4.0),
   Matrix,
   methods,
-  pracma
+  pracma,
+  slam
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown
 RoxygenNote: 7.1.0
+VignetteBuilder: knitr

@@ -14,10 +14,10 @@
 #' \dontrun{
 #' library(igraph)
 #' num_nodes <- 60
-#'g1 <- make_tree(num_nodes, children =2, mode = "out")
-#'E(g1)$weight <- seq_len(ecount(g1))
-#'g2 <- make_tree(num_nodes, children = 3, mode = "out")
-#'E(g2)$weight <- seq_len(ecount(g2))
+#' g1 <- make_tree(num_nodes, children =2, mode = "out")
+#' E(g1)$weight <- seq_len(ecount(g1))
+#' g2 <- make_tree(num_nodes, children = 3, mode = "out")
+#' E(g2)$weight <- seq_len(ecount(g2))
 #' binList <- getBins(list(g1, g2))
 #' ndd1 <- getNodeDistanceDistr(g1, binList)
 #' ndd2 <- getNodeDistanceDistr(g2, binList)
@@ -37,7 +37,9 @@ getGraphpairdistance <- function(distrib1, distrib2, returnnodeDist = FALSE){
 #' Find the pairwise Jensen Shannon divergence between distribution matrices of
 #' a list of graphs
 #' @param distribMatlist list of probability distribution matrices
-#'
+#' @param returnnodeDist Return node-wise distances(default=FALSE), if TRUE returns
+#' a list containing 2 elements: 1) nodewise distances and 2) graph distance
+#' (Gram) matrix
 #' @return Gram matrix with pairwise distances between graphs
 #' @import slam
 #' @export
@@ -78,6 +80,9 @@ getGraphlistdistance <- function(distribMatlist, returnnodeDist=FALSE){
 #'
 #' @param distribMatlist list of probability distribution matrices
 #' @param index possible values 1-4
+#' @param returnnodeDist Return node-wise distances(default=FALSE), if TRUE returns
+#' a list containing 2 elements: 1) nodewise distances and 2) graph distance
+#' (Gram) matrix
 #' @description used when there are numerous graphs, the graph samples can be
 #' divided into four as specified by the index. Run in 4 separate R sessions.
 #'Save the 4 matrices and reassemble the gram matrix
@@ -93,7 +98,7 @@ getGraphlistdistance4Parts <- function(distribMatlist, index = 1,
   distanceMat <- matrix(nrow = n, ncol = n)
   if (returnnodeDist == TRUE){
     forTensdim <- nrow(distribMatlist[[1]])
-    distanceTensor <- array(0, dim = c(numGraphs, numGraphs, forTensdim))
+    distanceTensor <- array(0, dim = c(n, n, forTensdim))
     distanceTensor <- slam::as.simple_sparse_array(distanceTensor)
   }
   if (index==1){

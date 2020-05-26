@@ -10,6 +10,10 @@ getGraphlistdistance4Parts(distribMatlist, index = 1, returnnodeDist = FALSE)
 \item{distribMatlist}{list of probability distribution matrices}
 
 \item{index}{possible values 1-4}
+
+\item{returnnodeDist}{Return node-wise distances(default=FALSE), if TRUE returns
+a list containing 2 elements: 1) nodewise distances and 2) graph distance
+(Gram) matrix}
 }
 \value{
 Gram matrix with Pairwise distances
