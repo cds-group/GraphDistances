@@ -41,7 +41,7 @@ getGraphpairdistance <- function(distrib1, distrib2){
 #' \dontrun{
 #' data("KidneyGraphs")
 #' binsList <- getBins(KidneyGraphs)
-#' nddList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binsaList))
+#' nddList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binsList))
 #' getGraphlistdistance(nddList)}
 getGraphlistdistance <- function(distribMatlist, writenodeDist=FALSE){
   numGraphs <- length(distribMatlist)
