@@ -27,12 +27,12 @@ E(g2)$weight <- seq_len(ecount(g2))
 binList <- getBins(list(g1, g2))
 ndd1 <- getNodeDistanceDistr(g1, binList)
 ndd2 <- getNodeDistanceDistr(g2, binList)
-nddDistancepair <- getGraphpairdistance(ndd1, ndd2) #Takes sometime for computation
+nddDistancepair <- getGraphpairdistance(ndd1, ndd2)
 
 # Compute the distances between the transition probability matrix (one walk) of 2 graphs
 trans1 <- getTransitionmatrix(g1, walk=1)
 trans2 <- getTransitionmatrix(g2, walk=1)
-transDistancepair <- getGraphpairdistance(trans1, trans2) #Takes sometime for computation
+transDistancepair <- getGraphpairdistance(trans1, trans2) 
 ```
 
 #### Distance computation: Multiple graphs
@@ -42,10 +42,10 @@ data("KidneyGraphs")
 
 binsList <- getBins(KidneyGraphs)
 nddList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binsList))
-nddDistanceMulti <- getGraphlistdistance(nddList)
+nddDistanceMulti <- getGraphlistdistance(nddList) #Takes sometime for computation
 
 transList <- lapply(KidneyGraphs, function(x) getTransitionmatrix(x, walk=1))
-transDistanceMulti <- getGraphlistdistance(transList)
+transDistanceMulti <- getGraphlistdistance(transList) #Takes sometime for computation
 ```
 
 ### Cite
