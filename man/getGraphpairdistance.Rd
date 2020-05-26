@@ -4,12 +4,16 @@
 \alias{getGraphpairdistance}
 \title{Find the Jensen Shannon divergence between distribution matrices of graphs}
 \usage{
-getGraphpairdistance(distrib1, distrib2)
+getGraphpairdistance(distrib1, distrib2, returnnodeDist = FALSE)
 }
 \arguments{
 \item{distrib1}{Probability distribution matrix of graph 1}
 
 \item{distrib2}{Probability distribution matrix of graph 2}
+
+\item{returnnodeDist}{Return node-wise distances(default=FALSE), if TRUE returns
+a list containing 2 elements: 1) nodewise distances and 2)graph distance
+- between the graph pairs}
 }
 \description{
 Find the Jensen Shannon divergence between distribution matrices of graphs
@@ -19,7 +23,9 @@ Find the Jensen Shannon divergence between distribution matrices of graphs
 library(igraph)
 num_nodes <- 60
 g1 <- make_tree(num_nodes, children =2, mode = "out")
+E(g1)$weight <- seq_len(ecount(g1))
 g2 <- make_tree(num_nodes, children = 3, mode = "out")
+E(g2)$weight <- seq_len(ecount(g2))
 binList <- getBins(list(g1, g2))
 ndd1 <- getNodeDistanceDistr(g1, binList)
 ndd2 <- getNodeDistanceDistr(g2, binList)

@@ -22,10 +22,10 @@ g1 <- make_tree(num_nodes, children =2, mode = "out")
 g2 <- make_tree(num_nodes, children = 3, mode = "out")
 
 # Compute the distances between the node distance distribution of 2 graphs
-binList <- getBins(list(g1, g2))
-ndd1 <- getNodeDistanceDistr(g1, binList)
-ndd2 <- getNodeDistanceDistr(g2, binList)
-nddDistancepair <- getGraphpairdistance(ndd1, ndd2)
+g1 <- make_tree(num_nodes, children =2, mode = "out")
+E(g1)$weight <- seq_len(ecount(g1))
+g2 <- make_tree(num_nodes, children = 3, mode = "out")
+E(g2)$weight <- seq_len(ecount(g2))
 
 # Compute the distances between the transition probability matrix (one walk) of 2 graphs
 trans1 <- getTransitionmatrix(g1, walk=1)
