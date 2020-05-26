@@ -9,7 +9,9 @@ devtools::install_github("cds-group/GraphDistances")
 ### Usage
 
 #### Load package
+```
 library(GraphDistances)
+```
 
 #### Distance computation: Pairwise
 Distance computation between the NDD (node distance distribution) and Transition Probability (TM-one walk) matrices of two example graphs.
