@@ -7,6 +7,38 @@ Code to compute **distribution** based distance measures between directed and un
 devtools::install_github("cds-group/GraphDistances")
 ```
 
+#### Pairwise distance computation
+```
+library(igraph)
+num_nodes <- 60
+g1 <- make_tree(num_nodes, children =2, mode = "out")
+g2 <- make_tree(num_nodes, children = 3, mode = "out")
+
+# Compute the distances between the node distance distribution of 2 graphs
+binList <- getBins(list(g1, g2))
+ndd1 <- getNodeDistanceDistr(g1, binList)
+ndd2 <- getNodeDistanceDistr(g2, binList)
+nddDistancepair <- getGraphpairdistance(ndd1, ndd2)
+
+# Compute the distances between the transition probability matrix (one walk) of 2 graphs
+trans1 <- getTransitionmatrix(g1, walk=1)
+trans2 <- getTransitionmatrix(g2, walk=2)
+nddDistancepair <- getGraphpairdistance(trans1, trans2)
+```
+
+#### Distance computation for multiple graphs
+nddDistanceMulti and transDistanceMulti are the Gram matrices produced after distance computation between 40 graphs provided with the package.
+```
+data("KidneyGraphs")
+
+binsList <- getBins(KidneyGraphs)
+nddList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binsList))
+nddDistanceMulti <- getGraphlistdistance(nddList)
+
+transList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binsList))
+transDistanceMulti <- getGraphlistdistance(transList)
+```
+
 ### Cite
 1. Granata, I., Guarracino, M.R., Kalyagin, V.A., Maddalena, L., Manipur, I. and Pardalos, P.M., 2018, December. Supervised classification of metabolic networks. In 2018 IEEE International Conference on Bioinformatics and Biomedicine (BIBM) (pp. 2688-2693). IEEE.
 https://ieeexplore.ieee.org/abstract/document/8621500
