@@ -6,8 +6,13 @@ Code to compute **distribution** based distance measures between directed and un
 ``` 
 devtools::install_github("cds-group/GraphDistances")
 ```
+### Usage
 
-#### Pairwise distance computation
+#### Load package
+library(GraphDistances)
+
+#### Distance computation: Pairwise
+Distance computation between the NDD (node distance distribution) and Transition Probability (TM-one walk) matrices of two example graphs.
 ```
 library(igraph)
 num_nodes <- 60
@@ -26,8 +31,8 @@ trans2 <- getTransitionmatrix(g2, walk=2)
 nddDistancepair <- getGraphpairdistance(trans1, trans2)
 ```
 
-#### Distance computation for multiple graphs
-nddDistanceMulti and transDistanceMulti are the Gram matrices produced after distance computation between 40 graphs provided with the package.
+#### Distance computation: Multiple graphs
+nddDistanceMulti and transDistanceMulti are the Gram matrices produced after distance computation between the NDD and TM-one walk matrices of [40 graphs](data/KidneyGraphs.RData) provided with the package. The [annotation](data/annoKidney.RData) of these graphs can be loaded by running data(annoKidney) in R for classification, clustering and visualization tasks.
 ```
 data("KidneyGraphs")
 
@@ -35,7 +40,7 @@ binsList <- getBins(KidneyGraphs)
 nddList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binsList))
 nddDistanceMulti <- getGraphlistdistance(nddList)
 
-transList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binsList))
+transList <- lapply(KidneyGraphs, function(x) getTransitionmatrix(x, walk=1))
 transDistanceMulti <- getGraphlistdistance(transList)
 ```
 
