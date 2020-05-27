@@ -77,7 +77,11 @@ getTransitionmatrix <- function(g, walk=1){
 
   if (walk==1){
     # find 1 walk transition matrix
-    adj_g <- as_adjacency_matrix(g, sparse = TRUE, attr="weight")
+    if (is_weighted(g) == TRUE){
+      adj_g <- as_adjacency_matrix(g, sparse = TRUE, attr="weight")
+    }else{
+      adj_g <- as_adjacency_matrix(g, sparse = TRUE)
+    }
     dw  <- rowSums(adj_g)
     dw[dw == 0] <- 1
 

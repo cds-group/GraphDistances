@@ -16,9 +16,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Introduction
+## GraphDistances
 
-Compute **distribution** based distance measures between weighted directed
+Compute **distribution** based distance measures between directed
 and undirected graphs/networks.
 
 ### Usage

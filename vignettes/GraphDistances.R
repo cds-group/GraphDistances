@@ -5,9 +5,6 @@ knitr::opts_chunk$set(
 )
 
 ## ---- echo=TRUE, eval=FALSE---------------------------------------------------
-#  devtools::install_github("cds-group/GraphDistances")
-
-## ---- echo=TRUE, eval=FALSE---------------------------------------------------
 #  library(GraphDistances)
 
 ## ---- echo=TRUE, eval=FALSE---------------------------------------------------

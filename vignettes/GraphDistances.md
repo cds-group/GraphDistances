@@ -1,7 +1,7 @@
 ---
 title: "GraphDistances"
 author: "Ichcha Manipur"
-date: "2020-05-26"
+date: "2020-05-27"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -11,17 +11,10 @@ vignette: >
 
 
 
-## Introduction
+## GraphDistances
 
-Compute **distribution** based distance measures between weighted directed
+Compute **distribution** based distance measures between directed
 and undirected graphs/networks.
-
-### Install
-
-
-```r
-devtools::install_github("cds-group/GraphDistances")
-```
 
 ### Usage
 
