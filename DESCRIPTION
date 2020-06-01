@@ -21,7 +21,9 @@ Imports: igraph,
   Matrix,
   methods,
   pracma,
-  slam
+  slam,
+  future.apply,
+  future
 Suggests: 
     testthat,
     knitr,

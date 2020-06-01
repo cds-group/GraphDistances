@@ -1,15 +1,13 @@
-
-#' Find the Jensen Shannon divergence between distribution matrices of graphs
-#'
+#' Jensen Shannon divergence between graph toplological distribution matrices
+#' @author Ichcha Manipur & Mario R Guarracino
 #' @param distrib1 Probability distribution matrix of graph 1
 #' @param distrib2 Probability distribution matrix of graph 2
 #' @param returnnodeDist Return node-wise distances(default=FALSE), if TRUE returns
-#' a list containing 2 elements: 1) nodewise distances and 2)graph distance
+#' a list containing 2 elements: 1) nodewise distances and 2) graph distance
 #' - between the graph pairs
 #' @import Matrix
 #' @import philentropy
 #' @export
-#'
 #' @examples
 #' \dontrun{
 #' library(igraph)
@@ -34,8 +32,9 @@ getGraphpairdistance <- function(distrib1, distrib2, returnnodeDist = FALSE){
   ifelse(returnnodeDist, return(list(Di, Dg)), return(Dg))
 }
 
-#' Find the pairwise Jensen Shannon divergence between distribution matrices of
+#' Pairwise Jensen Shannon divergence between distribution matrices of
 #' a list of graphs
+#' @author Ichcha Manipur & Mario R Guarracino
 #' @param distribMatlist list of probability distribution matrices
 #' @param returnnodeDist Return node-wise distances(default=FALSE), if TRUE returns
 #' a list containing 2 elements: 1) nodewise distances and 2) graph distance
@@ -48,7 +47,7 @@ getGraphpairdistance <- function(distrib1, distrib2, returnnodeDist = FALSE){
 #' data("KidneyGraphs")
 #' binsList <- getBins(KidneyGraphs)
 #' nddList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binsList))
-#' getGraphlistdistance(nddList)}
+#' nddDistanceMat <- getGraphlistdistance(nddList)}
 getGraphlistdistance <- function(distribMatlist, returnnodeDist=FALSE){
   numGraphs <- length(distribMatlist)
   distanceMat <- matrix(nrow = numGraphs, ncol = numGraphs)
@@ -61,7 +60,8 @@ getGraphlistdistance <- function(distribMatlist, returnnodeDist=FALSE){
     distrib1 <- distribMatlist[[i]]
     for (j in 1:numGraphs){
       distrib2 <- distribMatlist[[j]]
-      distComp <- getGraphpairdistance(distrib1, distrib2, returnnodeDist = returnnodeDist)
+      distComp <- getGraphpairdistance(distrib1, distrib2, returnnodeDist =
+                                         returnnodeDist)
 
       if (returnnodeDist == TRUE){
         distanceMat[i, j] <- distanceMat[j, i] <- distComp[[2]]
@@ -76,20 +76,31 @@ getGraphlistdistance <- function(distribMatlist, returnnodeDist=FALSE){
          return(distanceMat))
 }
 
+
+
 #' getGraphlistdistance4Parts
 #'
+#' @description used when there are numerous graphs, the graph samples can be
+#' divided into four as specified by the index. Run in 4 separate R sessions.
+#'Save the 4 matrices and reassemble the gram matrix
+#' @author Ichcha Manipur & Mario R Guarracino
 #' @param distribMatlist list of probability distribution matrices
 #' @param index possible values 1-4
 #' @param returnnodeDist Return node-wise distances(default=FALSE), if TRUE returns
 #' a list containing 2 elements: 1) nodewise distances and 2) graph distance
 #' (Gram) matrix
-#' @description used when there are numerous graphs, the graph samples can be
-#' divided into four as specified by the index. Run in 4 separate R sessions.
-#'Save the 4 matrices and reassemble the gram matrix
 #' @return Gram matrix with Pairwise distances
 #' @import slam
 #' @export
-#'
+#' @examples
+#' \dontrun{
+#' data("KidneyGraphs")
+#' binsList <- getBins(KidneyGraphs)
+#' nddList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binsList))
+#' # Run the function in 4 separate terminals store the matrix and reassemble with
+#' extractDist4part
+#' nddDistanceMatPar1 <- getGraphlistdistance4Parts(nddList, index = 1)
+#' # or use getGraphdistance4PartsParallel()}
 getGraphlistdistance4Parts <- function(distribMatlist, index = 1,
                                        returnnodeDist = FALSE){
 
@@ -165,3 +176,49 @@ getGraphlistdistance4Parts <- function(distribMatlist, index = 1,
   ifelse(returnnodeDist, return(list(distanceTensor, distanceMat)),
          return(distanceMat))
 }
+
+#' Construct the distance matrix from 4 parts obtained from parallel run
+#'
+#' @param distance4partList List containing 4 parts of the distance matrix
+#' @return Gram matrix with pairwise distances between graphs
+extractDist4part <- function(distance4partList){
+  n <- nrow(distance4partList[[1]])
+  distanceMat <- matrix(0, nrow = n, ncol = n)
+  for (idx in 1:4){
+    distMatrixpart <- distance4partList[[idx]]
+    distMatrixpart[is.na(distMatrixpart)] <- 0
+    distanceMat[distMatrixpart!=0] <- distMatrixpart[distMatrixpart!=0]
+  }
+  return(distanceMat)
+}
+
+#' Parallel run of the graph distances computation
+#' @author Ichcha Manipur
+#' @param distribMatlist list of probability distribution matrices
+#' @param returnnodeDist Return node-wise distances(default=FALSE), if TRUE returns
+#' a list containing 2 elements: 1) nodewise distances and 2) graph distance
+#' (Gram) matrix
+#' @return Gram matrix with pairwise distances between graphs
+#' @importFrom future.apply future_lapply
+#' @importFrom future plan
+#' @export
+#' @examples
+#' \dontrun{
+#' data("KidneyGraphs")
+#' binsList <- getBins(KidneyGraphs)
+#' library(future.apply)
+#' library(future)
+#' plan(multiprocess)
+#' nddListPar <- future_lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binsList))
+#' nddDistanceMultiPar <- getGraphdistance4PartsParallel(nddListPar)}
+getGraphdistance4PartsParallel <- function(distribMatlist, returnnodeDist =
+                                                 FALSE){
+  # change when returnnodeDist support added for nodewise distributionß
+  returnnodeDist <- FALSE
+  future::plan('multiprocess')
+  distance4partList <- future_lapply(1:4, function(x)
+    getGraphlistdistance4Parts(distribMatlist, x, returnnodeDist))
+  distanceMat <- extractDist4part(distance4partList)
+  return(distanceMat)
+}
+

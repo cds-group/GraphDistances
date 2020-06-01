@@ -2,7 +2,7 @@
 % Please edit documentation in R/distanceComp.R
 \name{getGraphpairdistance}
 \alias{getGraphpairdistance}
-\title{Find the Jensen Shannon divergence between distribution matrices of graphs}
+\title{Jensen Shannon divergence between graph toplological distribution matrices}
 \usage{
 getGraphpairdistance(distrib1, distrib2, returnnodeDist = FALSE)
 }
@@ -12,11 +12,11 @@ getGraphpairdistance(distrib1, distrib2, returnnodeDist = FALSE)
 \item{distrib2}{Probability distribution matrix of graph 2}
 
 \item{returnnodeDist}{Return node-wise distances(default=FALSE), if TRUE returns
-a list containing 2 elements: 1) nodewise distances and 2)graph distance
+a list containing 2 elements: 1) nodewise distances and 2) graph distance
 - between the graph pairs}
 }
 \description{
-Find the Jensen Shannon divergence between distribution matrices of graphs
+Jensen Shannon divergence between graph toplological distribution matrices
 }
 \examples{
 \dontrun{
@@ -30,4 +30,7 @@ binList <- getBins(list(g1, g2))
 ndd1 <- getNodeDistanceDistr(g1, binList)
 ndd2 <- getNodeDistanceDistr(g2, binList)
 getGraphpairdistance(ndd1, ndd2)}
+}
+\author{
+Ichcha Manipur & Mario R Guarracino
 }

@@ -3,6 +3,7 @@
 #'getBins finds the maximum diameter from the given graph list and returns the
 #'bins needed for the  getNodeDistanceDistr function
 #'
+#' @author Ichcha Manipur & Mario R Guarracino
 #' @param gList List of graphs in igraph format
 #'
 #' @return binList
@@ -22,6 +23,7 @@ getBins <- function(gList){
 
 #' Node Distance Distribution computation
 #'
+#' @author Ichcha Manipur & Mario R Guarracino
 #' @param g graph in igraph format
 #' @param binList bins for the distance distribution
 #'
@@ -31,14 +33,13 @@ getBins <- function(gList){
 #' @importFrom methods as
 #' @import Matrix
 #' @export
-#'
 #' @examples
 #' \dontrun{
 #' g <- igraph::make_tree(10, mode = "out")
 #' getNodeDistanceDistr(g)}
 getNodeDistanceDistr <- function(g, binList=NA){
 
-  if (any(is.na(binList))) { binList <- c(0:diameter(g), Inf) }
+  if (any(is.na(binList))) { binList <- c(0:ceiling(diameter(g)), Inf) }
   ifelse(is_directed(g), mode_g <- "out", mode_g <- "all")
   numNodes <- vcount(g)
 
@@ -55,6 +56,7 @@ getNodeDistanceDistr <- function(g, binList=NA){
 
 #' Transition Matrix computation
 #'
+#' @author Ichcha Manipur & Mario R Guarracino
 #' @param g graph in igraph format
 #' @param walk random walk distance (default=1)
 #'
@@ -68,6 +70,7 @@ getNodeDistanceDistr <- function(g, binList=NA){
 #' \dontrun{
 #' g <- igraph::make_tree(10, mode = "out")
 #' # calculate one walk transition probability matrix
+#' # For n walk matrix change the 'walk' parameter to n
 #' getTransitionmatrix(g, walk = 1)}
 getTransitionmatrix <- function(g, walk=1){
 

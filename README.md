@@ -4,6 +4,7 @@ Code to compute **distribution** based distance measures between directed and un
 
 ### Install
 ``` 
+#install.packages("devtools")
 devtools::install_github("cds-group/GraphDistances")
 ```
 ### Usage
@@ -13,7 +14,7 @@ devtools::install_github("cds-group/GraphDistances")
 library(GraphDistances)
 ```
 
-#### Distance computation: Pairwise
+#### Distance computation: **Pairwise**
 Distance computation between the NDD (node distance distribution) and Transition Probability (TM-one walk) matrices of two example graphs.
 ```
 library(igraph)
@@ -30,22 +31,37 @@ ndd2 <- getNodeDistanceDistr(g2, binList)
 nddDistancepair <- getGraphpairdistance(ndd1, ndd2)
 
 # Compute the distances between the transition probability matrix (one walk) of 2 graphs
+# For n walk matrix change the 'walk' parameter to n
 trans1 <- getTransitionmatrix(g1, walk=1)
 trans2 <- getTransitionmatrix(g2, walk=1)
 transDistancepair <- getGraphpairdistance(trans1, trans2) 
 ```
 
-#### Distance computation: Multiple graphs
+#### Distance computation: **Multiple graphs**
 nddDistanceMulti and transDistanceMulti are the Gram matrices produced after distance computation between the NDD and TM-one walk matrices of [40 graphs](data/KidneyGraphs.RData) provided with the package. The [annotation](data/annoKidney.RData) of these graphs can be loaded by running data(annoKidney) in R for classification, clustering and visualization tasks.
 ```
 data("KidneyGraphs")
 
-binsList <- getBins(KidneyGraphs)
-nddList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binsList))
+binList <- getBins(KidneyGraphs)
+nddList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binList))
 nddDistanceMulti <- getGraphlistdistance(nddList) #Takes sometime for computation
 
 transList <- lapply(KidneyGraphs, function(x) getTransitionmatrix(x, walk=1))
 transDistanceMulti <- getGraphlistdistance(transList) #Takes sometime for computation
+```
+
+#### Distance computation: **Multiple graphs: Parallel**
+getGraphdistance4PartsParallel can be used to run the distance computation in parallel.
+```
+library(future.apply)
+plan(multiprocess)
+binList <- getBins(KidneyGraphs)
+
+nddListPar <- future_lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binList))
+nddDistanceMultiPar <- getGraphdistance4PartsParallel(nddListPar)
+
+transListPar <- future_lapply(KidneyGraphs, function(x) getTransitionmatrix(x, walk=1))
+transDistanceMultiPar <- getGraphdistance4PartsParallel(transListPar)
 ```
 
 ### Cite

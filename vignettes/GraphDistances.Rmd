@@ -3,9 +3,10 @@ title: "GraphDistances"
 author: "Ichcha Manipur"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -45,6 +46,7 @@ ndd2 <- getNodeDistanceDistr(g2, binList)
 nddDistancepair <- getGraphpairdistance(ndd1, ndd2)
 
 # Compute the distances between the transition probability matrix (one walk) of 2 graphs
+# For n walk matrix change the 'walk' parameter to n
 trans1 <- getTransitionmatrix(g1, walk=1)
 trans2 <- getTransitionmatrix(g2, walk=1)
 transDistancepair <- getGraphpairdistance(trans1, trans2) 
@@ -55,14 +57,29 @@ nddDistanceMulti and transDistanceMulti are the Gram matrices produced after dis
 ```{r, echo=TRUE, eval=FALSE}
 data("KidneyGraphs")
 
-binsList <- getBins(KidneyGraphs)
-nddList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binsList))
+binList <- getBins(KidneyGraphs)
+nddList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binList))
 nddDistanceMulti <- getGraphlistdistance(nddList) #Takes sometime for computation
 
 transList <- lapply(KidneyGraphs, function(x) getTransitionmatrix(x, walk=1))
 transDistanceMulti <- getGraphlistdistance(transList) #Takes sometime for computation
 ```
 
+#### Distance computation: Multiple graphs: Parallel
+getGraphdistance4PartsParallel can be used to run the distance computation in parallel.
+```{r, echo=TRUE, eval=FALSE}
+library(future.apply)
+library(future)
+plan(multiprocess)
+
+data("KidneyGraphs")
+binList <- getBins(KidneyGraphs)
+nddListPar <- future_lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binList))
+nddDistanceMultiPar <- getGraphdistance4PartsParallel(nddListPar)
+
+transListPar <- future_lapply(KidneyGraphs, function(x) getTransitionmatrix(x, walk=1))
+transDistanceMultiPar <- getGraphdistance4PartsParallel(transListPar)
+```
 
 ### Cite
 1. Granata, I., Guarracino, M.R., Kalyagin, V.A., Maddalena, L., Manipur, I. and Pardalos, P.M., 2018, December. Supervised classification of metabolic networks. In 2018 IEEE International Conference on Bioinformatics and Biomedicine (BIBM) (pp. 2688-2693). IEEE.

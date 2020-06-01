@@ -23,3 +23,16 @@ used when there are numerous graphs, the graph samples can be
 divided into four as specified by the index. Run in 4 separate R sessions.
 Save the 4 matrices and reassemble the gram matrix
 }
+\examples{
+\dontrun{
+data("KidneyGraphs")
+binsList <- getBins(KidneyGraphs)
+nddList <- lapply(KidneyGraphs, function(x) getNodeDistanceDistr(x, binsList))
+# Run the function in 4 separate terminals store the matrix and reassemble with
+extractDist4part
+nddDistanceMatPar1 <- getGraphlistdistance4Parts(nddList, index = 1)
+# or use getGraphdistance4PartsParallel()}
+}
+\author{
+Ichcha Manipur & Mario R Guarracino
+}

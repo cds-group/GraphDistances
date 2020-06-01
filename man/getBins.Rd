@@ -21,3 +21,6 @@ bins needed for the  getNodeDistanceDistr function
 data(KidneyGraphs)
 binsG <- getBins(KidneyGraphs)}
 }
+\author{
+Ichcha Manipur & Mario R Guarracino
+}

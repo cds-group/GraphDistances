@@ -22,3 +22,6 @@ Node Distance Distribution computation
 g <- igraph::make_tree(10, mode = "out")
 getNodeDistanceDistr(g)}
 }
+\author{
+Ichcha Manipur & Mario R Guarracino
+}

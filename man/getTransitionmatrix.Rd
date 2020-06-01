@@ -21,5 +21,9 @@ Transition Matrix computation
 \dontrun{
 g <- igraph::make_tree(10, mode = "out")
 # calculate one walk transition probability matrix
+# For n walk matrix change the 'walk' parameter to n
 getTransitionmatrix(g, walk = 1)}
+}
+\author{
+Ichcha Manipur & Mario R Guarracino
 }
