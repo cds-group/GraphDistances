@@ -69,7 +69,7 @@ getSubnetworksEigenadjacent can be used to extract subnetworks based on the top 
 ```
 data(KidneyGraphs)
 g <- KidneyGraphs[[1]]
-g_sub <- getSubnetworksEigenadjacent(g, eigenSortcutoff = 0.1)}
+g_sub <- getSubnetworksEigenadjacent(g, eigenSortcutoff = 0.1)
 ```
 
 ### Cite
