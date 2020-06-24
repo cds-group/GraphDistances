@@ -75,7 +75,7 @@ g_sub <- getSubnetworksEigenadjacent(g, eigenSortcutoff = 0.1)}
 ### Cite
 If you make use of the GraphDistances package in your work please cite:
 
-**Granata, I., Guarracino, M.R., Maddalena, L. and Manipur, I., 2020, July. Network Distances for Weighted Digraphs. In 2020 International Conference on Mathematical Optimization Theory and Operations Research (MOTOR).**
+**Granata, I., Guarracino, M.R., Maddalena, L. and Manipur, I., 2020, July. Network Distances for Weighted Digraphs. Accepted In 2020 International Conference on Mathematical Optimization Theory and Operations Research (MOTOR).**
 
 ### References
 [1] Granata, I., Guarracino, M.R., Kalyagin, V.A., Maddalena, L., Manipur, I. and Pardalos, P.M., 2018, December. Supervised classification of metabolic networks. In 2018 IEEE International Conference on Bioinformatics and Biomedicine (BIBM) (pp. 2688-2693). IEEE.
@@ -84,4 +84,4 @@ https://ieeexplore.ieee.org/abstract/document/8621500
 [2] Granata, I., Guarracino, M.R., Kalyagin, V.A., Maddalena, L., Manipur, I. and Pardalos, P.M., 2020. Model simplification for supervised classification of metabolic networks. Annals of Mathematics and Artificial Intelligence, 88(1), pp.91-104.
 https://link.springer.com/article/10.1007/s10472-019-09640-y
 
-[3] Granata, I., Guarracino, M.R., Maddalena, L. and Manipur, I., 2020, July. Network Distances for Weighted Digraphs. In 2020 International Conference on Mathematical Optimization Theory and Operations Research (MOTOR).
+[3] Granata, I., Guarracino, M.R., Maddalena, L. and Manipur, I., 2020, July. Network Distances for Weighted Digraphs. Accepted In 2020 International Conference on Mathematical Optimization Theory and Operations Research (MOTOR).
