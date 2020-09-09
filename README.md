@@ -1,6 +1,6 @@
 # GraphDistances
 
-Code to compute **distribution** based distance measures between directed and undirected graphs/networks [1, 2, 3]. 
+Code to compute **distribution** based distance measures between directed and undirected graphs/networks [1, 2, 3, 4]. 
 
 ### Install
 ``` 
@@ -80,5 +80,7 @@ https://ieeexplore.ieee.org/abstract/document/8621500
 
 [3] Granata, I., Guarracino, M.R., Kalyagin, V.A., Maddalena, L., Manipur, I. and Pardalos, P.M., 2020. Model simplification for supervised classification of metabolic networks. Annals of Mathematics and Artificial Intelligence, 88(1), pp.91-104.
 https://link.springer.com/article/10.1007/s10472-019-09640-y
+
+[4] Manipur, I., Granata, I., Maddalena, L. and Guarracino, M.R., 2020. Clustering analysis of tumor metabolic networks. BMC bioinformatics, 21(10), pp.1-14. https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-020-03564-9
 
 
